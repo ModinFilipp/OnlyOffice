@@ -1,0 +1,57 @@
+[versions]
+agp = "8.6.1"
+kotlin = "1.9.0"
+coreKtx = "1.15.0"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+lifecycleRuntimeKtx = "2.8.7"
+activityCompose = "1.10.0"
+composeBom = "2025.01.01"
+navigationCompose = "2.8.6"
+fragmentKtx = "1.8.5"
+retrofit = "2.11.0"
+okhttp3 = "4.10.0"
+dataStore = "1.1.2"
+koin = "3.5.0"
+
+[libraries]
+# Core Android библиотеки
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+
+# Jetpack Compose и Material
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-material = { group = "androidx.compose.material", name = "material" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+
+# Тестовые библиотеки Compose
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+# Сетевые библиотеки
+com-retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+com-retrofit2-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+com-okhttp3 = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3" }
+
+# Fragment и DataStore
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
+androidx-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
+
+# Koin
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-android-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
