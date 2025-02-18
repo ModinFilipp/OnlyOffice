@@ -1,6 +1,7 @@
 package com.example.onlyofficetest.presentation.screens.profile
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,14 +11,18 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,19 +42,37 @@ fun ProfileScreen(
     dataStoreManager: DataStoreManager = koinInject()
 ) {
     val email by dataStoreManager.emailFlow.collectAsState("")
+    val state by remember { derivedStateOf { viewModel.state } }
 
-    ProfileContent(
-        modifier = modifier,
-        userName = email ?: "",
-        onLogoutClick = {
-            viewModel.logoutUser {
-                navController.navigate(AppRoutes.AuthScreen.route) {
-                    popUpTo(AppRoutes.MainScreen.route) { inclusive = true }
-                    launchSingleTop = true
+    Box (
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ){
+        ProfileContent(
+            modifier = modifier,
+            userName = email ?: "",
+            onLogoutClick = {
+                viewModel.logoutUser {
+                    navController.navigate(AppRoutes.AuthScreen.route) {
+                        popUpTo(AppRoutes.MainScreen.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
                 }
             }
+        )
+        // Индикатор загрузки
+        if (state.isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color(0x88000000)),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
         }
-    )
+    }
 }
 
 @Composable

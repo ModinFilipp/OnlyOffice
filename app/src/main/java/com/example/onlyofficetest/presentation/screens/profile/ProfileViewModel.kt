@@ -16,14 +16,14 @@ class ProfileViewModel(
 ) : ViewModel() {
 
     private val repository = AuthRepository()
-
-    private var isLoading by mutableStateOf(false)
     private var errorMessage by mutableStateOf("")
+    var state by mutableStateOf(ProfileState())
+        private set
 
     fun logoutUser(onSuccess: () -> Unit) {
 
         viewModelScope.launch {
-            isLoading = true
+            state = state.copy(isLoading = true)
             try {
                 val response: Response<Unit> = repository.logout()
                 if (response.isSuccessful) {
@@ -39,7 +39,7 @@ class ProfileViewModel(
                     "An error occurred: please try again later"
                 }
             } finally {
-                isLoading = false
+                state = state.copy(isLoading = false)
             }
         }
     }
